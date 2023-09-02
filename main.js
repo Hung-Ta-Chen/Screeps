@@ -2,6 +2,7 @@ let roleHarvester = require('role.harvester');
 let roleUpgrader = require('role.upgrader');
 let roleBuilder = require('role.builder');
 
+// Define constants for roles
 const Role = {
     HARVESTER: 0,
     HAULER: 1,
@@ -17,12 +18,23 @@ const Role = {
     ATTACKER: 11,
 };
 
+// Body parts of each role
 const roleBodyMap = new Map([
     [Role.HARVESTER, [WORK, CARRY, MOVE]],
     [Role.HAULER, [CARRY, CARRY, MOVE]],
-    [],
+    [Role.BUILDER, [WORK, CARRY, MOVE]],
+    [Role.UPGRADER, [WORK, CARRY, MOVE]],
+    [Role.DEFENDER, [TOUGH, ATTACK, MOVE]],
+    [Role.REMOTE_HARVESTER], [WORK, CARRY, MOVE]],
+    [Role.SCOUT, [MOVE]],
+    [Role.CLAIMER, [CLAIM, MOVE]],
+    [Role.MINER, [WORK, CARRY, MOVE]],
+    [Role.REPAIRER, [WORK, CARRY, MOVE]],
+    [Role.RESERVER, [CLAIM, MOVE]],
+    [Role.ATTACKER, [TOUGH, ATTACK, MOVE]],
 ]);
 
+// Calculate the cost of creating a creep
 function calculateCost(bodyParts){
     let costMap = new Map([
         [MOVE, 50],
@@ -66,8 +78,6 @@ module.exports.loop = function () {
             console.log('Clearing non-existing creep memory:', name);
         }
     }
-
-    
 
     for(let name in Game.creeps) {
         let creep = Game.creeps[name];
