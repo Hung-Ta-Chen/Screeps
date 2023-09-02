@@ -4,14 +4,25 @@ let roleBuilder = require('role.builder');
 
 const Role = {
     HARVESTER: 0,
-    BUILDER: 1,
-    UPGRADER: 2,
-    
+    HAULER: 1,
+    BUILDER: 2,
+    UPGRADER: 3,
+    DEFENDER: 4,
+    REMOTE_HARVESTER: 5,
+    SCOUT: 6,
+    CLAIMER: 7,
+    MINER: 8,
+    REPAIRER: 9,
+    RESERVER: 10,
+    ATTACKER: 11,
 };
 
 const roleBodyMap = new Map([
-    []
+    [Role.HARVESTER, [WORK, CARRY, MOVE]],
+    [Role.HAULER, [CARRY, CARRY, MOVE]],
+    [],
 ]);
+
 function calculateCost(bodyParts){
     let costMap = new Map([
         [MOVE, 50],
@@ -21,7 +32,7 @@ function calculateCost(bodyParts){
         [RANGED_ATTACK, 150],
         [HEAL, 250],
         [CLAIM, 600],
-        [TOUGH, 10]
+        [TOUGH, 10],
     ]);
 
     let cost = 0;
