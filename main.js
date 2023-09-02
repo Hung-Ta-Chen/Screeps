@@ -25,7 +25,7 @@ const roleBodyMap = new Map([
     [Role.BUILDER, [WORK, CARRY, MOVE]],
     [Role.UPGRADER, [WORK, CARRY, MOVE]],
     [Role.DEFENDER, [TOUGH, ATTACK, MOVE]],
-    [Role.REMOTE_HARVESTER], [WORK, CARRY, MOVE]],
+    [Role.REMOTE_HARVESTER, [WORK, CARRY, MOVE]],
     [Role.SCOUT, [MOVE]],
     [Role.CLAIMER, [CLAIM, MOVE]],
     [Role.MINER, [WORK, CARRY, MOVE]],
@@ -72,11 +72,23 @@ module.exports.loop = function () {
     }
     */
 
+    // Remove dead creeps from the memory
     for(var name in Memory.creeps) {
         if(!Game.creeps[name]) {
             delete Memory.creeps[name];
             console.log('Clearing non-existing creep memory:', name);
         }
+    }
+
+    // Check the number of harvesters
+    let n_harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
+    console.log('Harvesters: ' + n_harvesters.length);
+
+    if(n_harvesters.length < 2 && Game.spawns["Spawn1"].room.energyAvailable >= calculateCost(roleBodyMap.get(Role.HARVESTER))) {
+        var newName = 'Harvester' + (n_harvesters.length+1);
+        console.log('Spawning new harvester: ' + newName);
+        Game.spawns['Spawn1'].spawnCreep(roleBodyMap.get(Role.HARVESTER), newName,
+            {memory: {role: 'harvester'}});
     }
 
     for(let name in Game.creeps) {
