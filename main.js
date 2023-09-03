@@ -152,7 +152,7 @@ module.exports.loop = function () {
             roleBuilder.run(creep);
         }
         if(creep.memory.role == 'repairer') {
-            roleBuilder.run(creep);
+            roleRepairer.run(creep);
         }
     }
 }
