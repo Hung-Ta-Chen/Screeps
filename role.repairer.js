@@ -24,6 +24,10 @@ let roleRepairer = {
                     creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
                 }
             }
+            else{
+                // Rest at (40, 40)
+                creep.moveTo(40, 40);
+            }  
         }
     }
 };
