@@ -1,4 +1,6 @@
 let defenderRole = {
+
+    /** @param {Creep} creep **/
     run: function(creep) {
         let target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
         if (target) {
@@ -8,4 +10,5 @@ let defenderRole = {
         }
     }
 };
+
 module.exports = defenderRole;
