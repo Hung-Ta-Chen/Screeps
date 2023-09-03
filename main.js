@@ -1,6 +1,7 @@
-let roleHarvester = require('role.harvester');
-let roleUpgrader = require('role.upgrader');
-let roleBuilder = require('role.builder');
+let roleHarvester = require("role.harvester");
+let roleUpgrader = require("role.upgrader");
+let roleBuilder = require("role.builder");
+let roleDefender = require("role.defender");
 
 // Define constants for roles
 const Role = {
@@ -89,6 +90,17 @@ module.exports.loop = function () {
         console.log('Spawning new harvester: ' + newName);
         Game.spawns['Spawn1'].spawnCreep(roleBodyMap.get(Role.HARVESTER), newName,
             {memory: {role: 'harvester'}});
+    }
+
+    // Check the number of defenders
+    let n_defenders = _.filter(Game.creeps, (creep) => creep.memory.role == 'defender');
+    console.log('Defenders: ' + n_defenders.length);
+
+    if(n_defenders.length < 3 && Game.spawns["Spawn1"].room.energyAvailable >= calculateCost(roleBodyMap.get(Role.DEFENDER))) {
+        var newName = 'Defender' + (n_defenders.length+1);
+        console.log('Spawning new defender: ' + newName);
+        Game.spawns['Spawn1'].spawnCreep(roleBodyMap.get(Role.DEFENDER), newName,
+            {memory: {role: 'defender'}});
     }
 
     // Check the number of builders
