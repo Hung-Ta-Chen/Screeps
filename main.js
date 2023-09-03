@@ -2,7 +2,7 @@ let roleHarvester = require("role.harvester");
 let roleUpgrader = require("role.upgrader");
 let roleBuilder = require("role.builder");
 let roleDefender = require("role.defender");
-let roleDefender = require("role.repairer");
+let roleRepairer = require("role.repairer");
 
 // Define constants for roles
 const Role = {
