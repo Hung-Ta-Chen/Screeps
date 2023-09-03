@@ -1,4 +1,4 @@
-let defenderRole = {
+let roleDefender = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
