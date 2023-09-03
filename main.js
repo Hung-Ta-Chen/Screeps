@@ -96,7 +96,7 @@ module.exports.loop = function () {
     let n_defenders = _.filter(Game.creeps, (creep) => creep.memory.role == 'defender');
     console.log('Defenders: ' + n_defenders.length);
 
-    if(n_defenders.length < 3 && Game.spawns["Spawn1"].room.energyAvailable >= calculateCost(roleBodyMap.get(Role.DEFENDER))) {
+    if(n_defenders.length < 2 && Game.spawns["Spawn1"].room.energyAvailable >= calculateCost(roleBodyMap.get(Role.DEFENDER))) {
         var newName = 'Defender' + Game.time;
         console.log('Spawning new defender: ' + newName);
         Game.spawns['Spawn1'].spawnCreep(roleBodyMap.get(Role.DEFENDER), newName,
