@@ -27,7 +27,7 @@ let roleDefender = {
                             ];
             let currentWaypoint = creep.memory.waypoint || 0;
 
-            if (Math.abs(creep.pos.x - waypoints[currentWaypoint].x) <= 5 && Math.abs(creep.pos.y - waypoints[currentWaypoint].y) <= 5) {
+            if (Math.abs(creep.pos.x - waypoints[currentWaypoint].x) <= 3 && Math.abs(creep.pos.y - waypoints[currentWaypoint].y) <= 3) {
                 currentWaypoint = (currentWaypoint + 1) % waypoints.length;
             }
 
@@ -35,7 +35,8 @@ let roleDefender = {
             creep.memory.waypoint = currentWaypoint;
 
             // Move toward the current waypoint
-            creep.moveTo(waypoints[currentWaypoint].x, waypoints[currentWaypoint].y);
+            const targetPosition = new RoomPosition(waypoints[currentWaypoint].x, waypoints[currentWaypoint].y, creep.room.name);
+            creep.moveTo(targetPosition, { visualizePathStyle: { stroke: '#fadede' } });
         }
     }
 };
