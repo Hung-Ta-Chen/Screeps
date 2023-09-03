@@ -91,6 +91,18 @@ module.exports.loop = function () {
             {memory: {role: 'harvester'}});
     }
 
+    // Check the number of builders
+    let n_builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
+    console.log('Builders: ' + n_builders.length);
+
+    if(n_builders.length < 2 && Game.spawns["Spawn1"].room.energyAvailable >= calculateCost(roleBodyMap.get(Role.BUILDER))) {
+        var newName = 'Builder' + (n_builders.length+1);
+        console.log('Spawning new builder: ' + newName);
+        Game.spawns['Spawn1'].spawnCreep(roleBodyMap.get(Role.BUILDER), newName,
+            {memory: {role: 'builder'}});
+    }
+
+    // Make each creep do irs coeesponding job
     for(let name in Game.creeps) {
         let creep = Game.creeps[name];
         if(creep.memory.role == 'harvester') {
