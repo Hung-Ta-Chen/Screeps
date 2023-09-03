@@ -16,7 +16,7 @@ let roleDefender = {
             let yPos = Math.floor(Math.random() * 50);
             creep.moveTo(xPos, yPos);
             */
-            // If no hostile creeps are present, patrol between predefined waypoints
+            // If no hostile creeps are present, patrol between waypoints
             let waypoints = [{ x: 12, y: 10 }, 
                              { x: 9, y: 27 }, 
                              { x: 13, y: 44 }, 
