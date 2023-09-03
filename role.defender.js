@@ -11,4 +11,4 @@ let roleDefender = {
     }
 };
 
-module.exports = defenderRole;
+module.exports = roleDefender;
