@@ -1,6 +1,7 @@
-var roleRepairer = {
+let roleRepairer = {
+  
     run: function(creep) {
-        var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+        let target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
             filter: (structure) => structure.hits < structure.hitsMax
         });
         if (target) {
@@ -10,4 +11,5 @@ var roleRepairer = {
         }
     }
 };
-module.exports = repairerRole;
+
+module.exports = roleRepairer;
