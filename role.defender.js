@@ -27,9 +27,6 @@ let roleDefender = {
                             ];
             let currentWaypoint = creep.memory.waypoint || 0;
 
-            if (creep.posisEqualTo(waypoints[currentWaypoint].x, waypoints[currentWaypoint].y)) {
-                currentWaypoint = (currentWaypoint + 1) % waypoints.length;
-            }
             if (Math.abs(creep.pos.x - waypoints[currentWaypoint].x) <= 5 && Math.abs(creep.pos.y - waypoints[currentWaypoint].y) <= 5) {
                 currentWaypoint = (currentWaypoint + 1) % waypoints.length;
             }
