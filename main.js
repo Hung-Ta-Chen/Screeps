@@ -87,16 +87,41 @@ module.exports.loop = function () {
     }
 
     
-    // Check the number of harvesters
-    let n_harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
-    console.log('Harvesters: ' + n_harvesters.length);
+    // Check the number of builders
+    let n_builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
+    console.log('Builders: ' + n_builders.length);
 
-    if(n_harvesters.length < 4 && Game.spawns["Spawn1"].room.energyAvailable >= calculateCost(roleBodyMap.get(Role.HARVESTER))) {
-        var newName = 'Harvester' + Game.time;
-        console.log('Spawning new harvester: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep(roleBodyMap.get(Role.HARVESTER), newName,
-            {memory: {role: 'harvester'}});
+    if(n_builders.length < 4 && Game.spawns["Spawn1"].room.energyAvailable >= calculateCost(roleBodyMap.get(Role.BUILDER))) {
+        var newName = 'Builder' + Game.time;
+        console.log('Spawning new builder: ' + newName);
+        Game.spawns['Spawn1'].spawnCreep(roleBodyMap.get(Role.BUILDER), newName,
+            {memory: {role: 'builder'}});
     }
+
+    
+    // Check the number of upgraders
+    let n_upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
+    console.log('Upgraders: ' + n_upgraders.length);
+
+    if(n_upgraders.length < 3 && Game.spawns["Spawn1"].room.energyAvailable >= calculateCost(roleBodyMap.get(Role.UPGRADER))) {
+        var newName = 'Upgrader' + Game.time;
+        console.log('Spawning new upgrader: ' + newName);
+        Game.spawns['Spawn1'].spawnCreep(roleBodyMap.get(Role.UPGRADER), newName,
+            {memory: {role: 'upgrader'}});
+    }
+
+    
+    // Check the number of repairers
+    let n_repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer');
+    console.log('Repairers: ' + n_repairers.length);
+
+    if(n_repairers.length < 2 && Game.spawns["Spawn1"].room.energyAvailable >= calculateCost(roleBodyMap.get(Role.REPAIRER))) {
+        var newName = 'Repairer' + Game.time;
+        console.log('Spawning new repairer: ' + newName);
+        Game.spawns['Spawn1'].spawnCreep(roleBodyMap.get(Role.REPAIRER), newName,
+            {memory: {role: 'repairer'}});
+    }
+
 
     // Check the number of defenders
     let n_defenders = _.filter(Game.creeps, (creep) => creep.memory.role == 'defender');
@@ -109,37 +134,16 @@ module.exports.loop = function () {
             {memory: {role: 'defender'}});
     }
 
-    // Check the number of builders
-    let n_builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
-    console.log('Builders: ' + n_builders.length);
 
-    if(n_builders.length < 4 && Game.spawns["Spawn1"].room.energyAvailable >= calculateCost(roleBodyMap.get(Role.BUILDER))) {
-        var newName = 'Builder' + Game.time;
-        console.log('Spawning new builder: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep(roleBodyMap.get(Role.BUILDER), newName,
-            {memory: {role: 'builder'}});
-    }
+    // Check the number of harvesters
+    let n_harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
+    console.log('Harvesters: ' + n_harvesters.length);
 
-    // Check the number of upgraders
-    let n_upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
-    console.log('Upgraders: ' + n_upgraders.length);
-
-    if(n_upgraders.length < 3 && Game.spawns["Spawn1"].room.energyAvailable >= calculateCost(roleBodyMap.get(Role.UPGRADER))) {
-        var newName = 'Upgrader' + Game.time;
-        console.log('Spawning new upgrader: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep(roleBodyMap.get(Role.UPGRADER), newName,
-            {memory: {role: 'upgrader'}});
-    }
-
-    // Check the number of repairers
-    let n_repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer');
-    console.log('Repairers: ' + n_repairers.length);
-
-    if(n_repairers.length < 2 && Game.spawns["Spawn1"].room.energyAvailable >= calculateCost(roleBodyMap.get(Role.REPAIRER))) {
-        var newName = 'Repairer' + Game.time;
-        console.log('Spawning new repairer: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep(roleBodyMap.get(Role.REPAIRER), newName,
-            {memory: {role: 'repairer'}});
+    if(n_harvesters.length < 4 && Game.spawns["Spawn1"].room.energyAvailable >= calculateCost(roleBodyMap.get(Role.HARVESTER))) {
+        var newName = 'Harvester' + Game.time;
+        console.log('Spawning new harvester: ' + newName);
+        Game.spawns['Spawn1'].spawnCreep(roleBodyMap.get(Role.HARVESTER), newName,
+            {memory: {role: 'harvester'}});
     }
 
     // Make each creep do irs coeesponding job
