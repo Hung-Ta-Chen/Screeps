@@ -97,22 +97,11 @@ module.exports.loop = function () {
             {memory: {role: 'repairer'}});
     }
 
-    
-    // Check the number of upgraders
-    let n_upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
-
-    if(n_upgraders.length < 5 && Game.spawns["Spawn1"].room.energyAvailable >= calculateCost(roleBodyMap.get(Role.UPGRADER)) && !Game.spawns["Spawn1"].spawning) {
-        var newName = 'Upgrader' + Game.time;
-        console.log('Spawning new upgrader: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep(roleBodyMap.get(Role.UPGRADER), newName,
-            {memory: {role: 'upgrader'}});
-    }
-
-    
+   
     // Check the number of builders
     let n_builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
 
-    if(n_builders.length < 10 && Game.spawns["Spawn1"].room.energyAvailable >= calculateCost(roleBodyMap.get(Role.BUILDER)) && !Game.spawns["Spawn1"].spawning) {
+    if(n_builders.length < 8 && Game.spawns["Spawn1"].room.energyAvailable >= calculateCost(roleBodyMap.get(Role.BUILDER)) && !Game.spawns["Spawn1"].spawning) {
         var newName = 'Builder' + Game.time;
         console.log('Spawning new builder: ' + newName);
         Game.spawns['Spawn1'].spawnCreep(roleBodyMap.get(Role.BUILDER), newName,
@@ -130,11 +119,22 @@ module.exports.loop = function () {
             {memory: {role: 'defender'}});
     }
 
+    
+    // Check the number of upgraders
+    let n_upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
+
+    if(n_upgraders.length < 5 && Game.spawns["Spawn1"].room.energyAvailable >= calculateCost(roleBodyMap.get(Role.UPGRADER)) && !Game.spawns["Spawn1"].spawning) {
+        var newName = 'Upgrader' + Game.time;
+        console.log('Spawning new upgrader: ' + newName);
+        Game.spawns['Spawn1'].spawnCreep(roleBodyMap.get(Role.UPGRADER), newName,
+            {memory: {role: 'upgrader'}});
+    }
+
 
     // Check the number of harvesters
     let n_harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
 
-    if(n_harvesters.length < 10 && Game.spawns["Spawn1"].room.energyAvailable >= calculateCost(roleBodyMap.get(Role.HARVESTER)) && !Game.spawns["Spawn1"].spawning) {
+    if(n_harvesters.length < 6 && Game.spawns["Spawn1"].room.energyAvailable >= calculateCost(roleBodyMap.get(Role.HARVESTER)) && !Game.spawns["Spawn1"].spawning) {
         var newName = 'Harvester' + Game.time;
         console.log('Spawning new harvester: ' + newName);
         Game.spawns['Spawn1'].spawnCreep(roleBodyMap.get(Role.HARVESTER), newName,
