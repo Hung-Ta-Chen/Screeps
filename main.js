@@ -141,11 +141,11 @@ module.exports.loop = function () {
             {memory: {role: 'harvester'}});
     }
 
-    let numString = 'Harvesters: ${n_harvesters.length}, ' + 
-                    'Defenders: ${n_defenders.length}, ' + 
-                    'Repairers: ${n_repairers.length}, ' +
-                    'Upgraders: ${n_upgraders.length}, ' + 
-                    'Builders: ${n_builders.length}';
+    let numString = `Harvesters: ${n_harvesters.length}, ` + 
+                    `Defenders: ${n_defenders.length}, ` + 
+                    `Repairers: ${n_repairers.length}, ` +
+                    `Upgraders: ${n_upgraders.length}, ` + 
+                    `Builders: ${n_builders.length}`;
     console.log(numString);
 
     // Make each creep do its coeesponding job
