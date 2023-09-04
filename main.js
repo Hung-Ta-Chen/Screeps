@@ -76,10 +76,13 @@ module.exports.loop = function () {
     */
 
     // Remove dead creeps from the memory
-    for(var name in Memory.creeps) {
-        if(!Game.creeps[name]) {
-            delete Memory.creeps[name];
-            console.log('Clearing non-existing creep memory:', name);
+    for (var name in Memory.creeps) {
+        if (!Game.creeps[name]) {
+            // Check if the creep has a spawning property
+            if (!Memory.creeps[name].spawning) {
+                delete Memory.creeps[name];
+                console.log('Clearing non-existing creep memory:', name);
+            }
         }
     }
 
