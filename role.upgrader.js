@@ -5,7 +5,7 @@ let roleUpgrader = {
         // Check if there are any harvesters in the room
         let harvesters = _.filter(Game.creeps, (creep) => creep.memory.role === 'harvester');
 
-        if(harvesters === 0){
+        if(harvesters.length === 0){
             // Work as a harvester if no harvester is present
             creep.say('Work as a harvester!');
             if(creep.store.getFreeCapacity() > 0) {
