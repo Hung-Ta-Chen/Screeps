@@ -86,15 +86,15 @@ module.exports.loop = function () {
         }
     }
 
-    
-    // Check the number of builders
-    let n_builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
 
-    if(n_builders.length < 4 && Game.spawns["Spawn1"].room.energyAvailable >= calculateCost(roleBodyMap.get(Role.BUILDER))) {
-        var newName = 'Builder' + Game.time;
-        console.log('Spawning new builder: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep(roleBodyMap.get(Role.BUILDER), newName,
-            {memory: {role: 'builder'}});
+    // Check the number of repairers
+    let n_repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer');
+
+    if(n_repairers.length < 2 && Game.spawns["Spawn1"].room.energyAvailable >= calculateCost(roleBodyMap.get(Role.REPAIRER))) {
+        var newName = 'Repairer' + Game.time;
+        console.log('Spawning new repairer: ' + newName);
+        Game.spawns['Spawn1'].spawnCreep(roleBodyMap.get(Role.REPAIRER), newName,
+            {memory: {role: 'repairer'}});
     }
 
     
@@ -109,17 +109,17 @@ module.exports.loop = function () {
     }
 
     
-    // Check the number of repairers
-    let n_repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer');
+    // Check the number of builders
+    let n_builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
 
-    if(n_repairers.length < 2 && Game.spawns["Spawn1"].room.energyAvailable >= calculateCost(roleBodyMap.get(Role.REPAIRER))) {
-        var newName = 'Repairer' + Game.time;
-        console.log('Spawning new repairer: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep(roleBodyMap.get(Role.REPAIRER), newName,
-            {memory: {role: 'repairer'}});
+    if(n_builders.length < 4 && Game.spawns["Spawn1"].room.energyAvailable >= calculateCost(roleBodyMap.get(Role.BUILDER))) {
+        var newName = 'Builder' + Game.time;
+        console.log('Spawning new builder: ' + newName);
+        Game.spawns['Spawn1'].spawnCreep(roleBodyMap.get(Role.BUILDER), newName,
+            {memory: {role: 'builder'}});
     }
 
-
+    
     // Check the number of defenders
     let n_defenders = _.filter(Game.creeps, (creep) => creep.memory.role == 'defender');
 
