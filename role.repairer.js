@@ -5,6 +5,8 @@ const RepairerState = {
     Helping: 'helping',
 };
 
+let roleHarvester = require("role.harvester");
+
 let roleRepairer = {
  
     run: function(creep) {
@@ -13,28 +15,7 @@ let roleRepairer = {
 
         if(harvesters.length <= 2){
             // Work as a harvester if no harvester is present
-            creep.say('🔄 HARVEST');
-            if(creep.store.getFreeCapacity() > 0) {
-                let source = creep.pos.findClosestByRange(FIND_SOURCES);
-                if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
-                }
-            }
-            else {
-                let targets = creep.room.find(FIND_STRUCTURES, {
-                    filter: (structure) => {
-                        return (structure.structureType == STRUCTURE_EXTENSION ||
-                            structure.structureType == STRUCTURE_SPAWN ||
-                            structure.structureType == STRUCTURE_TOWER) &&
-                            structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
-                    }
-                });
-                if(targets.length > 0) {
-                    if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
-                    }
-                }
-            }
+            roleHarvester.run(creep);
         }
         else{
             // Do repairer's job
@@ -100,27 +81,7 @@ let roleRepairer = {
                     break;
     
                 case RepairerState.Helping:
-                    if(creep.store.getFreeCapacity() > 0) {
-                        let source = creep.pos.findClosestByRange(FIND_SOURCES);
-                        if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                            creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
-                        }
-                    }
-                    else {
-                        let targets = creep.room.find(FIND_STRUCTURES, {
-                            filter: (structure) => {
-                                return (structure.structureType == STRUCTURE_EXTENSION ||
-                                    structure.structureType == STRUCTURE_SPAWN ||
-                                    structure.structureType == STRUCTURE_TOWER) &&
-                                    structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
-                            }
-                        });
-                        if(targets.length > 0) {
-                            if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                                creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
-                            }
-                        }
-                    }
+                    roleHarvester.run(creep);
                     break;
             }
         } 
