@@ -18,14 +18,18 @@ let roleHarvester = {
                 }
             });
             if(targets.length > 0) {
-                // Find the first structure with free energy capacity
+                // Find the structure with most free energy capacity
+                let maxfreeCapacity = 0;
+                let structureMaxFreeCapacity = targets[0];
                 for(let target of targets){
-                    if(target.store.getFreeCapacity(RESOURCE_ENERGY) === 0){
-                        continue;
+                    if(target.store.getFreeCapacity(RESOURCE_ENERGY) > maxfreeCapacity){
+                        maxfreeCapacity = target.store.getFreeCapacity(RESOURCE_ENERGY);
+                        structureMaxFreeCapacity = target;
                     }
-                    if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
-                    }
+                }
+                // Transfer the energy
+                if(creep.transfer(structureMaxFreeCapacity, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(structureMaxFreeCapacity, {visualizePathStyle: {stroke: '#ffffff'}});
                 }
             }
         }
