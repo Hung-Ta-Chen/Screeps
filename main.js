@@ -112,7 +112,7 @@ module.exports.loop = function () {
     // Check the number of builders
     let n_builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
 
-    if(n_builders.length < 4 && Game.spawns["Spawn1"].room.energyAvailable >= calculateCost(roleBodyMap.get(Role.BUILDER))) {
+    if(n_builders.length < 10 && Game.spawns["Spawn1"].room.energyAvailable >= calculateCost(roleBodyMap.get(Role.BUILDER))) {
         var newName = 'Builder' + Game.time;
         console.log('Spawning new builder: ' + newName);
         Game.spawns['Spawn1'].spawnCreep(roleBodyMap.get(Role.BUILDER), newName,
@@ -123,7 +123,7 @@ module.exports.loop = function () {
     // Check the number of defenders
     let n_defenders = _.filter(Game.creeps, (creep) => creep.memory.role == 'defender');
 
-    if(n_defenders.length < 3 && Game.spawns["Spawn1"].room.energyAvailable >= calculateCost(roleBodyMap.get(Role.DEFENDER))) {
+    if(n_defenders.length < 5 && Game.spawns["Spawn1"].room.energyAvailable >= calculateCost(roleBodyMap.get(Role.DEFENDER))) {
         var newName = 'Defender' + Game.time;
         console.log('Spawning new defender: ' + newName);
         Game.spawns['Spawn1'].spawnCreep(roleBodyMap.get(Role.DEFENDER), newName,
@@ -134,7 +134,7 @@ module.exports.loop = function () {
     // Check the number of harvesters
     let n_harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
 
-    if(n_harvesters.length < 6 && Game.spawns["Spawn1"].room.energyAvailable >= calculateCost(roleBodyMap.get(Role.HARVESTER))) {
+    if(n_harvesters.length < 10 && Game.spawns["Spawn1"].room.energyAvailable >= calculateCost(roleBodyMap.get(Role.HARVESTER))) {
         var newName = 'Harvester' + Game.time;
         console.log('Spawning new harvester: ' + newName);
         Game.spawns['Spawn1'].spawnCreep(roleBodyMap.get(Role.HARVESTER), newName,
