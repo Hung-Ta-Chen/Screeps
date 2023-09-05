@@ -1,4 +1,4 @@
-let mainPhase1 = require("main.phase1");
+let modePhase1 = require("mode.phase1");
 
 // Main loop
-module.exports.loop = mainPhase1;
+module.exports.loop = modePhase1;
