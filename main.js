@@ -139,7 +139,11 @@ module.exports.loop = function () {
             {memory: {role: highestPriorityRole}});
     }
 
-
+    let n_repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer');
+    let n_builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
+    let n_defenders = _.filter(Game.creeps, (creep) => creep.memory.role == 'defender');
+    let n_upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
+    let n_harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
     let numString = `Harvesters: ${n_harvesters.length}, ` + 
                     `Defenders: ${n_defenders.length}, ` + 
                     `Repairers: ${n_repairers.length}, ` +
