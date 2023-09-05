@@ -26,11 +26,11 @@ const roleBodyMap = new Map([
 
 // Define the target number of each role
 const roleTargetCount = {
-    'upgrader': 3,
     'harvester': 4,
     'builder': 3,
     'defender': 3,
     'repairer': 3, 
+    'upgrader': 3,
 };
 
 
