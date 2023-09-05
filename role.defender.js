@@ -5,6 +5,7 @@ let roleDefender = {
         let target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
         if (target) {
             // Attack the enemy if found
+            creep.say("🔪🔪");
             if (creep.attack(target) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(target);
             }
@@ -37,6 +38,7 @@ let roleDefender = {
             // Move toward the current waypoint
             const targetPosition = new RoomPosition(waypoints[currentWaypoint].x, waypoints[currentWaypoint].y, creep.room.name);
             creep.moveTo(targetPosition, { visualizePathStyle: { stroke: '#fadede' } });
+            creep.say("💤");
         }
     }
 };
