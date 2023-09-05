@@ -75,10 +75,10 @@ function calculateCost(bodyParts){
 // Define the target number of each role
 const roleTargetCount = {
     'upgrader': 4,
-    'harvester': 6,
+    'harvester': 5,
     'builder': 5,
-    'defender': 4,
-    'repairer': 2, 
+    'defender': 3,
+    'repairer': 3, 
 };
 
 let mainPhase1 = function () {
