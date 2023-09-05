@@ -15,7 +15,7 @@ if (currentRoom.controller) {
         return total + extension.store.getCapacity(RESOURCE_ENERGY);
     }, 0);
     
-    totalEnergyCapacity = extensionsEnergyCapacity + Game.spawns["Spawn1"].getCapacity(RESOURCE_ENERGY);
+    totalEnergyCapacity = extensionsEnergyCapacity + Game.spawns["Spawn1"].store.getCapacity(RESOURCE_ENERGY);
 }
 
 
