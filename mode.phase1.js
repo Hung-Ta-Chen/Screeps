@@ -81,7 +81,7 @@ const roleTargetCount = {
     'repairer': 3, 
 };
 
-let mainPhase1 = function () {
+let modePhase1 = function () {
     /*
     let tower = Game.getObjectById('TOWER_ID');
     if(tower) {
@@ -172,4 +172,4 @@ let mainPhase1 = function () {
 }
 
 
-module.exports = mainPhase1;
+module.exports = modePhase1;
