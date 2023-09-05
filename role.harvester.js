@@ -2,7 +2,17 @@ let roleHarvester = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
-        if(creep.store.getFreeCapacity() === creep.store.getCapacity()) {
+        if(creep.memory.harvesting && creep.store.getFreeCapacity() == 0) {
+            creep.memory.harvesting = false;
+            creep.say('🚗 transfer');
+        }
+        if(!creep.memory.harvesting && creep.store[RESOURCE_ENERGY] == 0) {
+            creep.memory.harvesting = true;
+            creep.say('🔄 harvest');
+        }
+
+        
+        if(creep.memory.harvesting) {
             let sources = creep.room.find(FIND_SOURCES);
             if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#ffaa00'}});
