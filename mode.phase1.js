@@ -26,11 +26,11 @@ const roleBodyMap = new Map([
 
 // Define the target number of each role
 const roleTargetCount = {
-    'upgrader': 3,
     'harvester': 5,
     'builder': 4,
     'defender': 3,
     'repairer': 3, 
+    'upgrader': 3,
 };
 
 let modePhase1 = function () {
