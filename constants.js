@@ -1,5 +1,5 @@
 // Define constants for roles
-export const Role = {
+const Role = {
     HARVESTER: 0,
     HAULER: 1,
     BUILDER: 2,
@@ -15,7 +15,7 @@ export const Role = {
 };
 
 // Define a map between the name of a role and its corresponding costant
-export const roleNameConstantMap = {
+const roleNameConstantMap = {
     'harvester': Role.HARVESTER,
     'hauler': Role.HAULER,
     'builder': Role.BUILDER,
@@ -31,7 +31,7 @@ export const roleNameConstantMap = {
 };
 
 // Calculate the cost of creating a creep
-export function calculateCost(bodyParts){
+function calculateCost(bodyParts){
     let costMap = new Map([
         [MOVE, 50],
         [WORK, 100],
@@ -49,3 +49,10 @@ export function calculateCost(bodyParts){
     }
     return cost;
 }
+
+
+module.exports = {
+    Role,
+    roleNameConstantMap,
+    calculateCost,
+};
