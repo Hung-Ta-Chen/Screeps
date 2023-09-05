@@ -127,7 +127,7 @@ module.exports.loop = function () {
     let highestPriorityRole = null;
     for(let role in roleTargetCount){
         if(rolePriorityList[role] > highestPriority){
-            highestPriority = rolePriorityList[Role];
+            highestPriority = rolePriorityList[role];
             highestPriorityRole = role;
         }
     }
