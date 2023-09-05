@@ -116,11 +116,10 @@ module.exports.loop = function () {
     // Calculate the priority of each role based on their current count
     let rolePriorityList = {};
     for(let role in roleTargetCount){
-        let roleCount = _.filter(Game.creeps, (creep) => creep.memory.role == role);
+        let roleCount = _.filter(Game.creeps, (creep) => creep.memory.role == role).length;
         let rolePriority = roleTargetCount[role] - roleCount;
 
         rolePriorityList[role] = rolePriority;
-        console.log(role+": "+rolePriority);
     }
 
     // Generate a creep of the role with the highest priority
@@ -132,8 +131,6 @@ module.exports.loop = function () {
             highestPriorityRole = role;
         }
     }
-    console.log(highestPriority);
-    console.log(highestPriorityRole);
 
     if(highestPriorityRole && Game.spawns["Spawn1"].room.energyAvailable >= calculateCost(roleBodyMap.get(roleNameConstantMap[highestPriorityRole]))){
         var newName = highestPriorityRole + Game.time;
