@@ -27,8 +27,7 @@ let roleRepairer = {
                                 // Exclude walls and roads from repair targets
                                 return (
                                     structure.hits < structure.hitsMax &&
-                                    structure.structureType !== STRUCTURE_WALL &&
-                                    structure.structureType !== STRUCTURE_ROAD
+                                    structure.structureType !== STRUCTURE_WALL
                                 );
                             }
                         });
