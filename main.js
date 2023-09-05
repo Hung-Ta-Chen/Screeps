@@ -8,7 +8,7 @@ let totalEnergyCapacity = 0;
 if (currentRoom.controller) {    
     controllerLevel = currentRoom.controller.level;
 
-    const extensions = room.find(FIND_STRUCTURES, {
+    const extensions = currentRoom.find(FIND_STRUCTURES, {
         filter: (structure) => structure.structureType === STRUCTURE_EXTENSION
     });
     const extensionsEnergyCapacity = extensions.reduce((total, extension) => {
