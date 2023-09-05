@@ -26,7 +26,7 @@ let roleRepairer = {
                             filter: (structure) => {
                                 // Exclude walls and roads from repair targets
                                 return (
-                                    structure.hits < structure.hitsMax &&
+                                    structure.hits <= (structure.hitsMax) / 2 &&
                                     structure.structureType !== STRUCTURE_WALL
                                 );
                             }
