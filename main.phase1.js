@@ -150,7 +150,7 @@ let mainPhase1 = function () {
     console.log(numString);
 
     
-    // Make each creep do its coeesponding job
+    // Make each creep do its corresponding job
     for(let name in Game.creeps) {
         let creep = Game.creeps[name];
         if(creep.memory.role == 'harvester') {
