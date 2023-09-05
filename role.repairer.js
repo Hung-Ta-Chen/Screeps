@@ -21,7 +21,8 @@ let roleRepairer = {
             // Do repairer's job
             // Initialize repairer state if not already set
             creep.memory.repairerState = creep.memory.repairerState || RepairerState.Harvesting;
-    
+
+            // Find if there's any structure with hits less than half
             var targets = creep.room.find(FIND_STRUCTURES, {
                             filter: (structure) => {
                                 // Exclude walls and roads from repair targets
@@ -31,6 +32,19 @@ let roleRepairer = {
                                 );
                             }
                         });
+
+            // If no structure with hits less than half, find any damaged structure
+            if(targets.length === 0){
+                targets = creep.room.find(FIND_STRUCTURES, {
+                            filter: (structure) => {
+                                // Exclude walls and roads from repair targets
+                                return (
+                                    structure.hits < structure.hitsMax &&
+                                    structure.structureType !== STRUCTURE_WALL
+                                );
+                            }
+                        });
+            }
             
             
             // Handle state transitions
