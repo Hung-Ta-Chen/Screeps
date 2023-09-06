@@ -36,13 +36,16 @@ let roomManager = {
         if(hostileCreeps.length > 0){
             // Enter defense mode if any hostile creep detected
             roomMemory.mode = roomMode['defense'];
+            console.log("Invaded!");
         }
         else{
             if(roomMemory.controllerLevel >= 3 && totalEnergyCapacity >= 400){
                 roomMemory.mode = roomMode['phase2'];
+                console.log("Phase 2");
             }
             else{
                 roomMemory.mode = roomMode['phase1'];
+                console.log("Phase 1");
             }
         }
 
