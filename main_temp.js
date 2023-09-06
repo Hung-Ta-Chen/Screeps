@@ -1,4 +1,13 @@
 module.exports.loop = function () {
+    /*
+    // Remove rooms no longer visible
+    for (const roomName in Memory.rooms) {
+        if (!Game.rooms[roomName]) {
+            delete Memory.rooms[roomName];
+        }
+    }
+    */
+    
     // Initialize rooms in Memory if they are not already
     for (const roomName in Game.rooms) {
         if (!Memory.rooms[roomName]) {
