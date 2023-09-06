@@ -34,7 +34,7 @@ const roleTargetCount = {
 };
 
 
-let modePhase2 = function () {
+let modePhase2 = function (roomName) {
     /*
     let tower = Game.getObjectById('TOWER_ID');
     if(tower) {
@@ -52,6 +52,9 @@ let modePhase2 = function () {
     }
     */
 
+    const creepsInRoom = _.filter(Game.creeps, (creep) => creep.room.name === roomName);
+    const spawnsInRoom = _.filter(Game.spawns, (spawn) => spawn.room.name === roomName);
+    
     // Remove dead creeps from the memory
     for (var name in Memory.creeps) {
         if (!Game.creeps[name]) {
@@ -67,7 +70,7 @@ let modePhase2 = function () {
     // Calculate the priority of each role based on their current count
     let rolePriorityList = {};
     for(let role in roleTargetCount){
-        let roleCount = _.filter(Game.creeps, (creep) => creep.memory.role == role).length;
+        let roleCount = _.filter(creepsInRoom, (creep) => creep.memory.role == role).length;
         let rolePriority = roleTargetCount[role] - roleCount;
 
         rolePriorityList[role] = rolePriority;
@@ -83,19 +86,20 @@ let modePhase2 = function () {
         }
     }
 
-    if(highestPriorityRole && Game.spawns["Spawn1"].room.energyAvailable >= calculateCost(roleBodyMap.get(roleNameConstantMap[highestPriorityRole]))){
+    if(highestPriorityRole && Game.rooms[roomName].energyAvailable >= calculateCost(roleBodyMap.get(roleNameConstantMap[highestPriorityRole]))){
         var newName = highestPriorityRole + Game.time;
-        console.log('Spawning new ' + highestPriorityRole + ': ' + newName);
-        Game.spawns['Spawn1'].spawnCreep(roleBodyMap.get(roleNameConstantMap[highestPriorityRole]), newName,
+        console.log(`[${roomName}]` + 'Spawning new ' + highestPriorityRole + ': ' + newName);
+        spawnsInRoom[0].spawnCreep(roleBodyMap.get(roleNameConstantMap[highestPriorityRole]), newName,
             {memory: {role: highestPriorityRole}});
     }
 
-    let n_repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer');
-    let n_builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
-    let n_defenders = _.filter(Game.creeps, (creep) => creep.memory.role == 'defender');
-    let n_upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
-    let n_harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
-    let numString = `Harvesters: ${n_harvesters.length}, ` + 
+    let n_repairers = _.filter(creepsInRoom, (creep) => creep.memory.role == 'repairer');
+    let n_builders = _.filter(creepsInRoom, (creep) => creep.memory.role == 'builder');
+    let n_defenders = _.filter(creepsInRoom, (creep) => creep.memory.role == 'defender');
+    let n_upgraders = _.filter(creepsInRoom, (creep) => creep.memory.role == 'upgrader');
+    let n_harvesters = _.filter(creepsInRoom, (creep) => creep.memory.role == 'harvester');
+    let numString = `[${roomName}] ` + 
+                    `Harvesters: ${n_harvesters.length}, ` + 
                     `Defenders: ${n_defenders.length}, ` + 
                     `Repairers: ${n_repairers.length}, ` +
                     `Upgraders: ${n_upgraders.length}, ` + 
@@ -104,8 +108,8 @@ let modePhase2 = function () {
 
     
     // Make each creep do its corresponding job
-    for(let name in Game.creeps) {
-        let creep = Game.creeps[name];
+    for(let name in creepsInRoom) {
+        let creep = creepsInRoom[name];
         if(creep.memory.role == 'harvester') {
             roleHarvester.run(creep);
         }
