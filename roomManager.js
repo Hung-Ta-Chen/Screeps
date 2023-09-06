@@ -30,6 +30,7 @@ let roomManager = {
         
         // Detect hostile creeps
         const hostileCreeps = currentRoom.find(FIND_HOSTILE_CREEPS);
+
         
         // Change the mode of the room
         if(hostileCreeps.length > 0){
