@@ -88,7 +88,7 @@ let modePhase2 = function (roomName) {
 
     if(highestPriorityRole && Game.rooms[roomName].energyAvailable >= calculateCost(roleBodyMap.get(roleNameConstantMap[highestPriorityRole]))){
         var newName = highestPriorityRole + Game.time;
-        console.log(`[${roomName}]` + 'Spawning new ' + highestPriorityRole + ': ' + newName);
+        console.log(`[${roomName}] ` + 'Spawning new ' + highestPriorityRole + ': ' + newName);
         spawnsInRoom[0].spawnCreep(roleBodyMap.get(roleNameConstantMap[highestPriorityRole]), newName,
             {memory: {role: highestPriorityRole}});
     }
