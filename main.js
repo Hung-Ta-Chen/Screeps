@@ -28,8 +28,8 @@ module.exports.loop = function () {
 
         // Check if the room has a manager and it's enabled
         if (roomMemory.manager && roomMemory.manager.enabled) {
-            const managerModule = require(roomMemory.manager.module);
-            managerModule.run(roomName);
+            const roomManager = require(roomMemory.manager.module);
+            roomManager.run(roomName);
         }
     }
 };
