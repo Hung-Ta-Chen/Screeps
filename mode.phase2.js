@@ -45,7 +45,8 @@ let modePhase2 = function (roomName) {
             if(closestHostile) {
                 tower.attack(closestHostile);
             }
-            
+
+            /*
             // Repair the damaged structure
             let closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure) => {
@@ -58,6 +59,7 @@ let modePhase2 = function (roomName) {
             if(closestDamagedStructure) {
                 tower.repair(closestDamagedStructure);
             }
+            */
         }
     }
     
