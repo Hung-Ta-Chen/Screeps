@@ -34,22 +34,28 @@ const roleTargetCount = {
 };
 
 let modePhase1 = function (roomName) {
-    /*
-    let tower = Game.getObjectById('TOWER_ID');
-    if(tower) {
-        let closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
-            filter: (structure) => structure.hits < structure.hitsMax
-        });
-        if(closestDamagedStructure) {
-            tower.repair(closestDamagedStructure);
-        }
-
-        let closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-        if(closestHostile) {
-            tower.attack(closestHostile);
+    // Find all towers in the room that belong to you
+    const myStructures = Game.rooms[roomName].find(FIND_MY_STRUCTURES);
+    const towers = myStructures.filter(structure => structure.structureType === STRUCTURE_TOWER);
+    if(towers) {
+        for(let tower of towers){
+            // Attack the enemies
+            let closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+            if(closestHostile) {
+                tower.attack(closestHostile);
+            }
+            
+            // Repair the damaged structure
+            let closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
+                filter: (structure) => structure.hits < structure.hitsMax
+            });
+            if(closestDamagedStructure) {
+                tower.repair(closestDamagedStructure);
+            }
         }
     }
-    */
+
+    
     const creepsInRoom = _.filter(Game.creeps, (creep) => creep.room.name === roomName);
     const spawnsInRoom = _.filter(Game.spawns, (spawn) => spawn.room.name === roomName);
     
