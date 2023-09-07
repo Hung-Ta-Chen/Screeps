@@ -14,9 +14,26 @@ let roleBuilder = {
 
         if(creep.memory.building) {
             let targets = creep.room.find(FIND_CONSTRUCTION_SITES);
-            if(targets.length) {
-                if(creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
+            let nonRoadWallTargets = targets.filter(target => {
+                return (
+                    (target.structureType !== STRUCTURE_ROAD) &&
+                    (target.structureType !== STRUCTURE_WALL)
+                );
+            });
+            let roadWallTargets = targets.filter(target => {
+                return (
+                    (target.structureType === STRUCTURE_ROAD) ||
+                    (target.structureType === STRUCTURE_WALL)
+                );
+            });
+            if(nonRoadWallTargets.length) {
+                if(creep.build(nonRoadWallTargets[0]) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(nonRoadWallTargets[0], {visualizePathStyle: {stroke: '#ffffff'}});
+                }
+            }
+            else if(roadWallTargets.length){
+                if(creep.build(roadWallTargets[0]) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(roadWallTargets[0], {visualizePathStyle: {stroke: '#ffffff'}});
                 }
             }
         }
