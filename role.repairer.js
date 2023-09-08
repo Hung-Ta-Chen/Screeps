@@ -93,8 +93,16 @@ let roleRepairer = {
             switch (creep.memory.repairerState) {
                 case RepairerState.Repairing:     
                     if(nonRoadTargets){
-                        if(creep.repair(nonRoadTargets[0]) == ERR_NOT_IN_RANGE) {
-                            creep.moveTo(nonRoadTargets[0], {visualizePathStyle: {stroke: '#ffffff'}});
+                        let lowestHits = 3000000;
+                        let lowestHitsStructure = null;
+                        for(let target in nonRoadTargets){
+                            if(target.hits < lowestHits){
+                                lowestHits = target.hits;
+                                lowestHitsStructure = target;
+                            }
+                        }
+                        if(creep.repair(target) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
                         }
                         break;
                     }
