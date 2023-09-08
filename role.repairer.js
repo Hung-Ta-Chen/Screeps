@@ -28,7 +28,8 @@ let roleRepairer = {
                                 // Exclude walls and roads from repair targets
                                 return (
                                     structure.hits <= (structure.hitsMax) / 2 &&
-                                    structure.structureType !== STRUCTURE_WALL
+                                    structure.structureType !== STRUCTURE_WALL &&
+                                    structure.structureType !== STRUCTURE_CONTROLLER
                                 );
                             }
                         });
@@ -40,18 +41,19 @@ let roleRepairer = {
                                 // Exclude walls and roads from repair targets
                                 return (
                                     structure.hits < structure.hitsMax &&
-                                    structure.structureType !== STRUCTURE_WALL
+                                    structure.structureType !== STRUCTURE_WALL &&
+                                    structure.structureType !== STRUCTURE_CONTROLLER
                                 );
                             }
                         });
             }
 
-            let nonRoadTargets = targets.filter(target => {
+            var nonRoadTargets = targets.filter(target => {
                 return (
                     (target.structureType !== STRUCTURE_ROAD)
                 );
             });
-            let roadTargets = targets.filter(target => {
+            var roadTargets = targets.filter(target => {
                 return (
                     (target.structureType === STRUCTURE_ROAD)
                 );
@@ -91,27 +93,33 @@ let roleRepairer = {
 
             // Implement behavior based on the current state
             switch (creep.memory.repairerState) {
-                case RepairerState.Repairing:     
-                    if(nonRoadTargets){
+                case RepairerState.Repairing:    
+                    console.log(nonRoadTargets.length);
+                    console.log(roadTargets.length);
+                    if(nonRoadTargets.length){
+                        console.log("here");
                         let lowestHits = 3000000;
                         let lowestHitsStructure = null;
-                        for(let target in nonRoadTargets){
+                        for(let target of nonRoadTargets){
                             if(target.hits < lowestHits){
+                                console.log(target.hits);
                                 lowestHits = target.hits;
                                 lowestHitsStructure = target;
                             }
                         }
+                        
+                        console.log(lowestHitsStructure);
                         if(creep.repair(lowestHitsStructure) == ERR_NOT_IN_RANGE) {
+                            console.log("here11");
                             creep.moveTo(lowestHitsStructure, {visualizePathStyle: {stroke: '#ffffff'}});
                         }
-                        break;
                     }
-                    else if(roadTargets){
+                    else if(roadTargets.length){
                         if(creep.repair(roadTargets[0]) == ERR_NOT_IN_RANGE) {
                             creep.moveTo(roadTargets[0], {visualizePathStyle: {stroke: '#ffffff'}});
                         }
-                        break;
                     }
+                    break;
                     
     
                 case RepairerState.Harvesting:
