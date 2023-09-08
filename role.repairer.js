@@ -101,8 +101,8 @@ let roleRepairer = {
                                 lowestHitsStructure = target;
                             }
                         }
-                        if(creep.repair(target) == ERR_NOT_IN_RANGE) {
-                            creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
+                        if(creep.repair(lowestHitsStructure) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(lowestHitsStructure, {visualizePathStyle: {stroke: '#ffffff'}});
                         }
                         break;
                     }
