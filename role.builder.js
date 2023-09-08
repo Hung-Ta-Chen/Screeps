@@ -27,8 +27,8 @@ let roleBuilder = {
                 );
             });
             if(nonRoadWallTargets.length) {
-                if(creep.build(nonRoadWallTargets[0]) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(nonRoadWallTargets[0], {visualizePathStyle: {stroke: '#ffffff'}});
+                if(creep.build(nonRoadWallTargets[nonRoadWallTargets.length-1]) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(nonRoadWallTargets[nonRoadWallTargets.length-1], {visualizePathStyle: {stroke: '#ffffff'}});
                 }
             }
             else if(roadWallTargets.length){
