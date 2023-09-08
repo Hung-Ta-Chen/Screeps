@@ -45,6 +45,17 @@ let roleRepairer = {
                             }
                         });
             }
+
+            let nonRoadTargets = targets.filter(target => {
+                return (
+                    (target.structureType !== STRUCTURE_ROAD)
+                );
+            });
+            let roadTargets = targets.filter(target => {
+                return (
+                    (target.structureType === STRUCTURE_ROAD)
+                );
+            });
             
             
             // Handle state transitions
@@ -80,11 +91,20 @@ let roleRepairer = {
 
             // Implement behavior based on the current state
             switch (creep.memory.repairerState) {
-                case RepairerState.Repairing:                    
-                    if(creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
+                case RepairerState.Repairing:     
+                    if(nonRoadTargets){
+                        if(creep.repair(nonRoadTargets[0]) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(nonRoadTargets[0], {visualizePathStyle: {stroke: '#ffffff'}});
+                        }
+                        break;
                     }
-                    break;
+                    else if(roadTargets){
+                        if(creep.repair(roadTargets[0]) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(roadTargets[0], {visualizePathStyle: {stroke: '#ffffff'}});
+                        }
+                        break;
+                    }
+                    
     
                 case RepairerState.Harvesting:
                     let sources = creep.room.find(FIND_SOURCES);
